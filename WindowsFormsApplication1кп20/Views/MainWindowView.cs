@@ -9,7 +9,7 @@ namespace WindowsFormsApplication1кп20.Views
 {
     public partial class MainWindowView : Form
     {
-        private ResultView _resultView = new ResultView();
+        private readonly ResultView _resultView = new ResultView();
 
         public MainPresenter CurrentPresenter { get; set; }
 
