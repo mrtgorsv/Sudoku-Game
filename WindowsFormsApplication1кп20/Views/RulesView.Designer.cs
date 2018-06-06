@@ -72,6 +72,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.RulesLabel);
             this.Name = "RulesView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.ResumeLayout(false);
             this.PerformLayout();
 

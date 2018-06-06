@@ -49,27 +49,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="Events\TimerTickEventArgs.cs" />
+    <Compile Include="Models\UserResult.cs" />
     <Compile Include="Presenters\ResultPresenter.cs" />
     <Compile Include="Presenters\PresenterBase.cs" />
     <Compile Include="Presenters\RulesPresenter.cs" />
     <Compile Include="Presenters\GamePresenter.cs" />
-    <Compile Include="Presenters\RegisterPresenter.cs" />
+    <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Utils\EventArgs\GameCompleteEventArgs.cs" />
+    <Compile Include="Utils\PoolingWorker.cs" />
     <Compile Include="Utils\Sudoku\Board.cs" />
     <Compile Include="Utils\Sudoku\BoardBox.cs" />
     <Compile Include="Utils\Sudoku\BoardGenerator.cs" />
-    <Compile Include="Utils\Sudoku\BoardPoker.cs" />
+    <Compile Include="Utils\Sudoku\BoardCreator.cs" />
     <Compile Include="Utils\Sudoku\BoardSolver.cs" />
     <Compile Include="Utils\IoC\IocConfiguration.cs" />
     <Compile Include="Utils\IoC\IocKernel.cs" />
     <Compile Include="Utils\IoC\PresenterLocator.cs" />
-    <Compile Include="Utils\Sudoku\MirrorBoardPoker.cs" />
+    <Compile Include="Utils\Sudoku\MirrorBoardCreator.cs" />
     <Compile Include="Utils\SecurityManager.cs" />
-    <Compile Include="Views\RegisterView.cs">
+    <Compile Include="Views\MainWindowView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\RegisterView.Designer.cs">
-      <DependentUpon>RegisterView.cs</DependentUpon>
+    <Compile Include="Views\MainWindowView.Designer.cs">
+      <DependentUpon>MainWindowView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\GameView.cs">
       <SubType>Form</SubType>
@@ -91,8 +95,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Views\RegisterView.resx">
-      <DependentUpon>RegisterView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MainWindowView.resx">
+      <DependentUpon>MainWindowView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\GameView.resx">
       <DependentUpon>GameView.cs</DependentUpon>
@@ -123,6 +127,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

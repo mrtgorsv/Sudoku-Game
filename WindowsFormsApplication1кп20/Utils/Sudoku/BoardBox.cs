@@ -1,12 +1,11 @@
-namespace WindowsFormsApplication1êï20.Utils.Sudoku {
-
-	class BoardBox {
+ï»¿namespace WindowsFormsApplication1ÐºÐ¿20.Utils.Sudoku {
+    public class BoardBox {
 
 		protected int[,] Grid;
 
 		public BoardBox() {
 			Grid = new int[3, 3];
-			WhipeGrid();
+			ClearGrid();
 		}
 
 		public int GetNumber(int x, int y) {
@@ -17,7 +16,7 @@ namespace WindowsFormsApplication1êï20.Utils.Sudoku {
 			Grid[x, y] = num;
 		}
 
-		public void WhipeGrid() {
+		public void ClearGrid() {
 			for (int x = 0; x < 3; x += 1) {
 				for (int y = 0; y < 3; y += 1) {
 					Grid[x, y] = 0;

@@ -16,7 +16,6 @@ namespace WindowsFormsApplication1кп20.Views
             CurrentPresenter = IocKernel.Get<RulesPresenter>();
             InitializeSource();
             InitializeListeners();
-            Text = Resources.MainTitle;
         }
 
         private void InitializeListeners()
@@ -32,6 +31,13 @@ namespace WindowsFormsApplication1кп20.Views
         private void InitializeSource()
         {
             RulesLabel.Text = CurrentPresenter.Rules;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            Text = Resources.MainTitle;
+            Icon = Resources.Icon;
         }
     }
 }

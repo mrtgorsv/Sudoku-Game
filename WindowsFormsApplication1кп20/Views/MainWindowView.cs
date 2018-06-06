@@ -2,30 +2,37 @@
 using System.Windows.Forms;
 using WindowsFormsApplication1кп20.Presenters;
 using WindowsFormsApplication1кп20.Properties;
+using WindowsFormsApplication1кп20.Utils.EventArgs;
 using WindowsFormsApplication1кп20.Utils.IoC;
 
 namespace WindowsFormsApplication1кп20.Views
 {
-    public partial class RegisterView : Form
+    public partial class MainWindowView : Form
     {
-        public RegisterPresenter CurrentPresenter { get; set; }
+        private ResultView _resultView = new ResultView();
 
-        public RegisterView()
+        public MainPresenter CurrentPresenter { get; set; }
+
+        public MainWindowView()
         {
             InitializeComponent();
             InitializeListeners();
-            CurrentPresenter = IocKernel.Get<RegisterPresenter>();
-            Text = Resources.MainTitle;
+            CurrentPresenter = IocKernel.Get<MainPresenter>();
         }
 
         private void InitializeListeners()
         {
-            ContinueButton.Click += OnContinueButtonClicked;
             RulesButton.Click += OnRulesButtonClicked;
             ExitButton.Click += OnExitButtonClicked;
-            OkButton.Click += OnContinueButtonClicked;
-            ContinueButton.Click += OnContinueButtonClicked;
+            StartButton.Click += OnStartButtonClicked;
+            ResultButton.Click += OnResultButtonClicked;
         }
+
+        private void OnResultButtonClicked(object sender, EventArgs e)
+        {
+            ShowResultView();
+        }
+
 
         private void OnExitButtonClicked(object sender, EventArgs e)
         {
@@ -44,7 +51,7 @@ namespace WindowsFormsApplication1кп20.Views
             rules.ShowDialog(this);
         }
 
-        private void OnContinueButtonClicked(object sender, EventArgs e)
+        private void OnStartButtonClicked(object sender, EventArgs e)
         {
             ShowGameView();
         }
@@ -60,12 +67,32 @@ namespace WindowsFormsApplication1кп20.Views
 
             GameView game = new GameView {Text = Resources.MainTitle};
             game.Closed += OnGameClosed;
+            game.GameComplete += OnGameCompleted;
             game.Show(this);
+        }
+
+        private void OnGameCompleted(object sender, GameCompleteEventArgs args)
+        {
+            (sender as GameView)?.Close();
+            Show();
+            _resultView.AddResult(args.ElapsedTime);
+            ShowResultView();
+        }
+        private void ShowResultView()
+        {
+            _resultView.ShowDialog(this);
         }
 
         private void OnGameClosed(object sender, EventArgs e)
         {
-            Application.Exit();
+            Show();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            Text = Resources.MainTitle;
+            Icon = Resources.Icon;
         }
     }
 }

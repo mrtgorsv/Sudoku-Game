@@ -3,12 +3,12 @@ using Ninject.Modules;
 
 namespace WindowsFormsApplication1кп20.Utils.IoC
 {
-    class IocConfiguration : NinjectModule
+    internal class IocConfiguration : NinjectModule
     {
         public override void Load()
         {
             Bind<GamePresenter>().ToSelf().InTransientScope();
-            Bind<RegisterPresenter>().ToSelf().InTransientScope();
+            Bind<MainPresenter>().ToSelf().InTransientScope();
             Bind<ResultPresenter>().ToSelf().InTransientScope();
             Bind<RulesPresenter>().ToSelf().InTransientScope();
 

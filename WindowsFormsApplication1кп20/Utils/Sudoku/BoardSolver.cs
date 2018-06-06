@@ -1,7 +1,7 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 
-namespace WindowsFormsApplication1êï20.Utils.Sudoku
+namespace WindowsFormsApplication1ÐºÐ¿20.Utils.Sudoku
 {
     internal class BoardSolver
     {
@@ -16,14 +16,14 @@ namespace WindowsFormsApplication1êï20.Utils.Sudoku
 
         public bool CanBeSolved()
         {
-            return (CountSolutions(true) > 0);
+            return CountSolutions(true) > 0;
         }
 
         public int CountSolutions(bool stopAtOne = false)
         {
             Solutions = 0;
 
-            int index = 0;
+            const int index = 0;
             EmptyCells = new List<Tuple<int, int>>();
             // find the empty cells
             for (int y = 0; y < 9; y += 1)
@@ -31,11 +31,9 @@ namespace WindowsFormsApplication1êï20.Utils.Sudoku
                 for (int x = 0; x < 9; x += 1)
                 {
                     int num = GameBoard.GetNumber(x, y);
-                    if (num == 0)
-                    {
-                        Tuple<int, int> empty = new Tuple<int, int>(x, y);
-                        EmptyCells.Add(empty);
-                    }
+                    if (num != 0) continue;
+                    Tuple<int, int> empty = new Tuple<int, int>(x, y);
+                    EmptyCells.Add(empty);
                 }
             }
 
@@ -60,12 +58,12 @@ namespace WindowsFormsApplication1êï20.Utils.Sudoku
                 {
                     int subX = (int) Math.Floor((double) x / 3);
                     int subY = (int) Math.Floor((double) y / 3);
-                    int relX = x - (subX * 3);
-                    int relY = y - (subY * 3);
+                    int relX = x - subX * 3;
+                    int relY = y - subY * 3;
                     if (GameBoard.CanPlaceAtSubGrid(subX, subY, relX, relY, num))
                     {
                         GameBoard.SetNumber(x, y, num);
-                        if (index == (EmptyCells.Count - 1))
+                        if (index == EmptyCells.Count - 1)
                         {
                             Solutions += 1;
                         }

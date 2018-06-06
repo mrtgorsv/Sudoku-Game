@@ -1,14 +1,14 @@
-using System;
+ï»¿using System;
 
-namespace WindowsFormsApplication1êï20.Utils.Sudoku
+namespace WindowsFormsApplication1ÐºÐ¿20.Utils.Sudoku
 {
-    internal class MirrorBoardPoker : BoardPoker
+    internal class MirrorBoardCreator : BoardCreator
     {
         private int _toRemove;
 
-        public MirrorBoardPoker(ref Board pBoard) : base(ref pBoard)
+        public MirrorBoardCreator(ref Board pBoard) : base(ref pBoard)
         {
-            _toRemove = 52;
+            _toRemove = 4;
         }
 
         public override void Process()
@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1êï20.Utils.Sudoku
             {
                 int rx = rnd.Next(0, 9);
                 int ry = rnd.Next(0, 9);
-                int testNum = PuzzleBoard.GetNumber(rx, ry);
+                int testNum = GameBoard.GetNumber(rx, ry);
                 if (testNum == 0)
                 {
                     continue;
@@ -26,8 +26,8 @@ namespace WindowsFormsApplication1êï20.Utils.Sudoku
 
                 int mx = 8 - rx;
                 int my = 8 - ry;
-                PuzzleBoard.SetNumber(rx, ry, 0);
-                PuzzleBoard.SetNumber(mx, my, 0);
+                GameBoard.SetNumber(rx, ry, 0);
+                GameBoard.SetNumber(mx, my, 0);
                 _toRemove -= 2;
             }
         }

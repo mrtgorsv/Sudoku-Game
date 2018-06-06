@@ -1,15 +1,15 @@
-using System;
+ο»Ώusing System;
 
-namespace WindowsFormsApplication1κο20.Utils.Sudoku
+namespace WindowsFormsApplication1ΠΊΠΏ20.Utils.Sudoku
 {
-    class Board
+    public class Board
     {
         protected BoardBox[,] BoardBox;
 
         public Board()
         {
             BoardBox = new BoardBox[3, 3];
-            WhipeBoard();
+            ClearBoard();
         }
 
         public bool CanBePlacedAtPosition(int x, int y, int num)
@@ -20,7 +20,6 @@ namespace WindowsFormsApplication1κο20.Utils.Sudoku
                 return false;
             }
 
-            // row
             for (int tx = 0; tx < 9; tx += 1)
             {
                 if (tx == x)
@@ -35,7 +34,6 @@ namespace WindowsFormsApplication1κο20.Utils.Sudoku
                 }
             }
 
-            // col
             for (int ty = 0; ty < 9; ty += 1)
             {
                 if (ty == y)
@@ -64,7 +62,7 @@ namespace WindowsFormsApplication1κο20.Utils.Sudoku
                 {
                     for (int y = 0; y < 3; y += 1)
                     {
-                        if ((x == relX) && (y == relY))
+                        if (x == relX && y == relY)
                         {
                             continue;
                         }
@@ -92,32 +90,15 @@ namespace WindowsFormsApplication1κο20.Utils.Sudoku
             return false;
         }
 
-        public void CopyBoard(Board master)
+        public void Copy(Board source)
         {
             for (int y = 0; y < 9; y += 1)
             {
                 for (int x = 0; x < 9; x += 1)
                 {
-                    SetNumber(x, y, master.GetNumber(x, y));
+                    SetNumber(x, y, source.GetNumber(x, y));
                 }
             }
-        }
-
-        public static Board FromString(string boardString)
-        {
-            Board board = new Board();
-            int chr = 0;
-            for (int y = 0; y < 9; y += 1)
-            {
-                for (int x = 0; x < 9; x += 1)
-                {
-                    int num = Convert.ToInt32("" + boardString[chr]);
-                    chr += 1;
-                    board.SetNumber(x, y, num);
-                }
-            }
-
-            return board;
         }
 
         public int GetNumber(int x, int y)
@@ -125,8 +106,8 @@ namespace WindowsFormsApplication1κο20.Utils.Sudoku
             int row = (int) Math.Floor((double) y / 3);
             int col = (int) Math.Floor((double) x / 3);
             BoardBox bb = BoardBox[col, row];
-            int minorX = x - (col * 3);
-            int minorY = y - (row * 3);
+            int minorX = x - col * 3;
+            int minorY = y - row * 3;
             return bb.GetNumber(minorX, minorY);
         }
 
@@ -135,31 +116,12 @@ namespace WindowsFormsApplication1κο20.Utils.Sudoku
             int row = (int) Math.Floor((double) y / 3);
             int col = (int) Math.Floor((double) x / 3);
             BoardBox bb = BoardBox[col, row];
-            int minorX = x - (col * 3);
-            int minorY = y - (row * 3);
+            int minorX = x - col * 3;
+            int minorY = y - row * 3;
             bb.SetNumber(minorX, minorY, num);
         }
 
-        public string ToString(bool asGrid = false)
-        {
-            string output = "";
-            for (int y = 0; y < 9; y += 1)
-            {
-                for (int x = 0; x < 9; x += 1)
-                {
-                    output += "" + GetNumber(x, y);
-                }
-
-                if (asGrid)
-                {
-                    output += "\n";
-                }
-            }
-
-            return output;
-        }
-
-        public void WhipeBoard()
+        public void ClearBoard()
         {
             for (int x = 0; x < 3; x += 1)
             {

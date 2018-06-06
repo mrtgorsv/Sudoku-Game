@@ -75,6 +75,7 @@
             this.Controls.Add(this.ResultListBox);
             this.Controls.Add(this.label1);
             this.Name = "ResultView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.ResumeLayout(false);
             this.PerformLayout();
 

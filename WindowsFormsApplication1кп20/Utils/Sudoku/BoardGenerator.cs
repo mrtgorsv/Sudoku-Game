@@ -1,89 +1,97 @@
-using System;
+ï»¿using System;
 
-namespace WindowsFormsApplication1êï20.Utils.Sudoku {
+namespace WindowsFormsApplication1ÐºÐ¿20.Utils.Sudoku
+{
+    internal class BoardGenerator
+    {
+        protected const int MaxEmptySearchAttempts = 40;
 
-	class BoardGenerator {
+        protected Board SolutionBoard;
+        protected Board GameBoard;
 
-		protected const int MaxEmptySearchAttempts = 40;
+        protected static Random Rnd = new Random();
 
-		protected Board SolutionBoard;
-		protected Board PuzzleBoard;
+        public void GenerateGameBoard()
+        {
+            bool valid = false;
+            while (!valid)
+            {
+                Board testBoard = new Board();
+                testBoard.Copy(SolutionBoard);
 
-		protected static Random Rnd = new Random();
-
-	    public void GeneratePuzzleBoard(string generator = "mirror") {
-			bool solvable = false;
-			while (!solvable) {
-				Board testBoard = new Board();
-				testBoard.CopyBoard(SolutionBoard);
-
-			    MirrorBoardPoker mbp = new MirrorBoardPoker(ref testBoard);
-			    mbp.Process();
-
-                // STEP 2: test if solvable with 1 solution
+                MirrorBoardCreator mbp = new MirrorBoardCreator(ref testBoard);
+                mbp.Process();
                 BoardSolver bs = new BoardSolver(testBoard);
-				int numSolutions = bs.CountSolutions();
-				if (numSolutions == 1) {
-					//Console.WriteLine("Found 1 solution for board!");
-					solvable = true;
-				}
-				// STEP 3: check
-				if (solvable) {
-					PuzzleBoard = testBoard;
-				}
-			}
-		}
+                if (bs.CountSolutions() == 1)
+                {
+                    valid = true;
+                }
+                if (valid)
+                {
+                    GameBoard = testBoard;
+                }
+            }
+        }
 
-		public void GenerateSolutionBoard() {
-			SolutionBoard = new Board();
-			while (!TrySolutionGeneration()) {
-				SolutionBoard.WhipeBoard();
-			}
-		}
+        public void GenerateSolutionBoard()
+        {
+            SolutionBoard = new Board();
+            while (!TryGenerateSolution())
+            {
+                SolutionBoard.ClearBoard();
+            }
+        }
 
-		public Board GetPuzzleBoard() {
-			return PuzzleBoard;
-		}
+        public Board GetGameBoard()
+        {
+            return GameBoard;
+        }
 
-		public Board GetSolutionBoard() {
-			return SolutionBoard;
-		}
+        public Board GetSolutionBoard()
+        {
+            return SolutionBoard;
+        }
 
-		protected bool TrySolutionGeneration() {
-			//Random rnd = new Random();
-			for (int num = 1; num <= 9; num += 1) {
-				for (int xq = 0; xq < 3; xq += 1) {
-					for (int yq = 0; yq < 3; yq += 1) {
-						int tries = 0;
-						bool foundEmpty = false;
-						int absX = 0;
-						int absY = 0;
-						while (!foundEmpty) {
-							int rx, ry;
-							lock(Rnd) {
-								rx = Rnd.Next(0, 3);
-								ry = Rnd.Next(0, 3);
-							}
-							absX = (xq * 3) + rx;
-							absY = (yq * 3) + ry;
-							if (SolutionBoard.CanPlaceAtSubGrid(xq, yq, rx, ry, num)) {
-								if (SolutionBoard.CanBePlacedAtPosition(absX, absY, num)) {
-									foundEmpty = true;
-								}
-							}
-							tries += 1;
-							if (!foundEmpty && (tries >= MaxEmptySearchAttempts)) {
-								return false;
-							}
-						}
-						// set number
-						SolutionBoard.SetNumber(absX, absY, num);
-					}
-				}
-			}
-			return true;
-		}
-
-	}
-
+        protected bool TryGenerateSolution()
+        {
+            for (int num = 1; num <= 9; num += 1)
+            {
+                for (int xq = 0; xq < 3; xq += 1)
+                {
+                    for (int yq = 0; yq < 3; yq += 1)
+                    {
+                        int tries = 0;
+                        bool foundEmpty = false;
+                        int absX = 0;
+                        int absY = 0;
+                        while (!foundEmpty)
+                        {
+                            int rx, ry;
+                            lock (Rnd)
+                            {
+                                rx = Rnd.Next(0, 3);
+                                ry = Rnd.Next(0, 3);
+                            }
+                            absX = xq * 3 + rx;
+                            absY = yq * 3 + ry;
+                            if (SolutionBoard.CanPlaceAtSubGrid(xq, yq, rx, ry, num))
+                            {
+                                if (SolutionBoard.CanBePlacedAtPosition(absX, absY, num))
+                                {
+                                    foundEmpty = true;
+                                }
+                            }
+                            tries += 1;
+                            if (!foundEmpty && tries >= MaxEmptySearchAttempts)
+                            {
+                                return false;
+                            }
+                        }
+                        SolutionBoard.SetNumber(absX, absY, num);
+                    }
+                }
+            }
+            return true;
+        }
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace WindowsFormsApplication1кп20.Presenters
 {
-    public class RegisterPresenter : PresenterBase
+    public class MainPresenter : PresenterBase
     {
-        public RegisterPresenter(ISecurityManager securityManager) : base(securityManager)
+        public MainPresenter(ISecurityManager securityManager) : base(securityManager)
         {
             //
         }

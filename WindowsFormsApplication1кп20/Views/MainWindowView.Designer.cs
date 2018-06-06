@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1кп20.Views
 {
-    partial class RegisterView
+    partial class MainWindowView
     {
         /// <summary>
         /// Требуется переменная конструктора.
@@ -31,10 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.OkButton = new System.Windows.Forms.Button();
-            this.ContinueButton = new System.Windows.Forms.Button();
+            this.StartButton = new System.Windows.Forms.Button();
             this.RulesButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
+            this.ResultButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -65,27 +65,16 @@
             this.NameTextBox.Size = new System.Drawing.Size(262, 31);
             this.NameTextBox.TabIndex = 2;
             // 
-            // OkButton
+            // StartButton
             // 
-            this.OkButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.OkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OkButton.Location = new System.Drawing.Point(355, 145);
-            this.OkButton.Name = "OkButton";
-            this.OkButton.Size = new System.Drawing.Size(161, 31);
-            this.OkButton.TabIndex = 3;
-            this.OkButton.Text = "ОК";
-            this.OkButton.UseVisualStyleBackColor = false;
-            // 
-            // ContinueButton
-            // 
-            this.ContinueButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ContinueButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ContinueButton.Location = new System.Drawing.Point(260, 194);
-            this.ContinueButton.Name = "ContinueButton";
-            this.ContinueButton.Size = new System.Drawing.Size(155, 36);
-            this.ContinueButton.TabIndex = 4;
-            this.ContinueButton.Text = "Продолжить";
-            this.ContinueButton.UseVisualStyleBackColor = false;
+            this.StartButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.StartButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.StartButton.Location = new System.Drawing.Point(343, 143);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(155, 33);
+            this.StartButton.TabIndex = 4;
+            this.StartButton.Text = "Начать игру";
+            this.StartButton.UseVisualStyleBackColor = false;
             // 
             // RulesButton
             // 
@@ -109,22 +98,33 @@
             this.ExitButton.Text = "Выход";
             this.ExitButton.UseVisualStyleBackColor = false;
             // 
-            // Form1
+            // ResultButton
+            // 
+            this.ResultButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ResultButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ResultButton.Location = new System.Drawing.Point(179, 413);
+            this.ResultButton.Name = "ResultButton";
+            this.ResultButton.Size = new System.Drawing.Size(155, 36);
+            this.ResultButton.TabIndex = 7;
+            this.ResultButton.Text = "Результаты";
+            this.ResultButton.UseVisualStyleBackColor = false;
+            // 
+            // MainWindowView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(657, 461);
+            this.Controls.Add(this.ResultButton);
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.RulesButton);
-            this.Controls.Add(this.ContinueButton);
-            this.Controls.Add(this.OkButton);
+            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Name = "Form1";
-            this.Text = "Игра \"Судоку\"";
+            this.Name = "MainWindowView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,10 +135,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox NameTextBox;
-        private System.Windows.Forms.Button OkButton;
-        private System.Windows.Forms.Button ContinueButton;
+        private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Button RulesButton;
         private System.Windows.Forms.Button ExitButton;
+        private System.Windows.Forms.Button ResultButton;
     }
 }
 
